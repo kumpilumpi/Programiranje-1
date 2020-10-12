@@ -28,12 +28,12 @@ medved. Zvrhano zibelko sladkih hrušk mi je prinesel za en sam izdrt trn"."""
 
 import re
 
-def find_words(text, r_izraz):
-    pattern = re.compile(r'.*' + r_izraz + r'.*')
-    m = re.match(pattern, text)
-    return {m.group(0)}
+def find_words(text, substring):
+    pattern = re.compile(r'\b\w*' + substring + r'\w*\b')
+    m = re.findall(pattern, text)
+    return m
 
-
+#find_words(test_text, 'de'))
 
 ###############################################################################
 # 2) Sestavite funkcijo [find_prefix], ki vrne množico vseh besed, ki se
@@ -44,12 +44,12 @@ def find_words(text, r_izraz):
 ###############################################################################
 
 def find_prefix(text, pred):
-    pattern = re.compile(r'.*')
+    pattern = re.compile(r'\b' + pred + r'\w*\b')
     m = re.findall(pattern, text)
     return m
 
 
-test = find_prefix(test_text,)
+# print(find_prefix(test_text, 'zi'))
 
 ###############################################################################
 # 3) Sestavite funkcijo [find_suffix], ki vrne množico vseh besed, ki se
@@ -59,6 +59,12 @@ test = find_prefix(test_text,)
 # {'zibala', 'razveselila', 'prestrašila', 'šivala', 'opazila', 'tla'}
 ###############################################################################
 
+def find_suffix(text, suffix):
+    pattern = re.compile(r'\b\w*' + suffix + r'\b')
+    m = re.findall(pattern, text)
+    return m
+
+# print(find_suffix(test_text, 'la'))
 
 ###############################################################################
 # 4) Sestavite funkcijo [double_letters], ki sprejme niz in vrne množico vseh
@@ -67,3 +73,11 @@ test = find_prefix(test_text,)
 # >>> double_letters('A volunteer is worth twenty pressed men.')
 # {'volunteer', 'pressed'}
 ###############################################################################
+
+niz = 'A volunteer is worth twenty pressed men.'
+def double_letters(niz):
+    pattern = re.compile(r'\b\w*(\w)\1\w*\b')
+    # m = re.findall(pattern, niz)  #findall vrne čudne zadeve z notranjimi grupami v regularnih izrazih 
+    return {m.group(0) for m in re.finditer(pattern, niz)}
+
+print(double_letters(niz))
