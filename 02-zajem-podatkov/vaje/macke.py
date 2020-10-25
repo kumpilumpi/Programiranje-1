@@ -1,5 +1,6 @@
 import csv
 import os
+import requests
 
 ###############################################################################
 # Najprej definirajmo nekaj pomožnih orodij za pridobivanje podatkov s spleta.
