@@ -127,7 +127,9 @@ let zip sez1 sez2 =
  - : int list * string list = ([0; 1; 2], ["a"; "b"; "c"])
 [*----------------------------------------------------------------------------*)
 
-let rec unzip = ()
+(* let rec unzip = function
+    [] -> [][]
+    |(a, b) :: xs -> ([a], [b]) *)
 
 (*----------------------------------------------------------------------------*]
  Funkcija [unzip_tlrec] je repno rekurzivna različica funkcije [unzip].
@@ -136,7 +138,13 @@ let rec unzip = ()
  - : int list * string list = ([0; 1; 2], ["a"; "b"; "c"])
 [*----------------------------------------------------------------------------*)
 
-let rec unzip_tlrec = ()
+let rec unzip_tlrec sez_par =
+  let rec aux sez_par prvi drugi =
+    match sez_par with
+    |[] -> (List.rev prvi, List.rev drugi)
+    | (a, b) :: xs -> aux xs (a :: prvi) (b :: drugi)
+  in
+  aux sez_par [] []
 
 (*----------------------------------------------------------------------------*]
  Funkcija [loop condition f x] naj se izvede kot python koda:
@@ -226,7 +234,11 @@ let rec filter p sez =
  - : bool = false
 [*----------------------------------------------------------------------------*)
 
-let exists = ()
+let rec exists func sez =
+  match sez with 
+  | [] -> false
+  |x :: xs -> if func x then true else exists func xs
+
 (*----------------------------------------------------------------------------*]
  Funkcija [first f default list] vrne prvi element seznama, za katerega
  funkcija [f] vrne [true]. Če takšnega elementa ni, vrne [default].
