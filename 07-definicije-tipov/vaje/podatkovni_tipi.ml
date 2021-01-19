@@ -213,7 +213,7 @@ let update' ({arcane} as mag_count) magic_type = match magic_type with
  - : magic_counter = {fire = 3; frost = 0; arcane = 0}
 [*----------------------------------------------------------------------------*)
 
-let rec count_magic sez_mag = ()
+let rec count_magic sez_mag = ()                               
 
 (*----------------------------------------------------------------------------*]
  Želimo poiskati primernega kandidata za delovni razpis. Študent lahko postane

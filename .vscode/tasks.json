@@ -2,21 +2,27 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Python",
-            "type": "shell",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "windows": {
-                "command": "python -i \\\"${file}\\\""
-                },
-            "linux": {
-                "command": "python -i \"${file}\""
-            },
-            "osx": {
-                "command": "python -i \"${file}\""
-            }
+            
+                "label": "python run file",
+                "type": "shell",
+                "command": "python -i \\\"${file}\\\"",
+                "problemMatcher": []
+            
+            // "label": "Python",
+            // "type": "shell",
+            // "group": {
+            //     "kind": "build",
+            //     "isDefault": true
+            // },
+            // "windows": {
+            //     "command": "python -i \\\"${file}\\\""
+            //     },
+            // "linux": {
+            //     "command": "python -i \"${file}\""
+            // },
+            // "osx": {
+            //     "command": "python -i \"${file}\""
+            // }
         },
         {
             "label": "OCaml",
