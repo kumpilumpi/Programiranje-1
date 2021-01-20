@@ -2,7 +2,7 @@ type barva = string
 
 let moje_barve : barva list = ["rdeča"; "modra"; "rumena"; "stol"]
 
-let je_svetla (b : barva) : bool =
+let je_svetla (b : barva) : bool  =
   match b with
   | "rumena" -> true
   | "modra" -> false
@@ -11,7 +11,9 @@ let je_svetla (b : barva) : bool =
   | "rjava" -> false
   | _ -> true
 
+
 let je_noc_svetla = je_svetla "zelo temna noč"
+
 
 type barva' =
   | Rdeca
@@ -19,7 +21,7 @@ type barva' =
   | Rumena
   | Modra
 
-let moje_barve : barva' list = [Rdeca; Modra; Rumena; Stol]
+let moje_barve : barva' list = [Rdeca; Modra; Rumena]
 
 
 type stanje_narocila =
@@ -42,11 +44,23 @@ let moja_slika = [
   Daljica ({x = 0.; y = 0.}, {x = -1.; y = 1.});
   Kroznica {sredisce = {x = -1.; y = 1.}; radij = 2. ** 0.5}
 ]
-let koliko_svincnika_potrebujem obj =
+
+
+let koliko_svincnika_potrebujem obj : float =
   match obj with
   | Tocka _ -> 0.
   | Daljica (p, q) -> ((p.x -. q.x) ** 2. +. (p.y -. q.y) ** 2.) ** 0.5
   | Kroznica k -> 3.14 *. k.radij ** 2.
+
+
+let rec svincnik (sez_obj : geometrijski_objekt list) : float =
+ match sez_obj with
+  | [] -> 0.
+  | x :: xs -> (koliko_svincnika_potrebujem x ) +. (svincnik xs)
+
+
+
+(*
 
 type cevlji = Cevlji of float
 type metri = Metri of float
@@ -97,4 +111,6 @@ type int_ali_float =
 let vsota x y =
 match x, y with
 | Int m, Int n -> Int (m + n)
-| Int m, Float y -> Float (float_of_int m +. y)
+| Int m, Float y -> Float (float_of_int m +. y) 
+
+*)

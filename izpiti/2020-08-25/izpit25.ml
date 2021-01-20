@@ -1,3 +1,46 @@
+
+(* 1 ---------------------------- *)
+
+(* B *)
+
+let list_of_triple =
+  function
+  | a :: b :: c :: [] -> Some (a , b , c)
+  | _ -> None
+
+(* C *)
+
+type counter = {lt : int ; eq : int ; gt : int}
+
+let compare_with sez x =
+  let rec aux counter' x =
+    function
+    | [] -> counter'
+    | y :: ys -> (
+      if y > x then aux ( {lt = counter'.lt ; eq = counter'.eq ; gt = counter'.gt + 1 } ) x ys
+      else(
+        if y = x then aux ( {lt = counter'.lt ; eq = counter'.eq + 1 ; gt = counter'.gt } ) x ys 
+        else
+          aux ( {lt = counter'.lt + 1 ; eq = counter'.eq ; gt = counter'.gt } ) x ys     
+      )
+    )
+    in
+    aux { lt = 0 ; eq = 0 ; gt = 0 } x sez
+
+(* C *)
+
+let apply_all x sez_f =
+  let rec aux x sez_f =
+    match sez_f with
+    | [] -> x
+    | f :: fs -> aux (f x) fs
+  in
+  aux x (List.rev sez_f)
+
+let long_test = List.init 1000000 (fun _ -> (+) 1)
+
+
+
 (* 2 ---------------------------- *)
 (* A *)
 
@@ -41,7 +84,7 @@ let alternates tree =
 (* D *)
 
 let boxed_correctly tree =
-  let preveri sez_pogoj sez_tock = (*sez pogoj je ([pogoji za x] * [pogoji za y])*)
+  (* let preveri sez_pogoj sez_tock = (*sez pogoj je ([pogoji za x] * [pogoji za y])*)
     ()
   in
   let rec aux pogoji tree =
@@ -49,5 +92,5 @@ let boxed_correctly tree =
     | Elements ( sez ) -> preveri pogoji sez (* true / false*)
     | Xsplit (delilna, a, b) -> (aux (((<=)delilna :: (fst pogoji)) , (snd pogoji)) a) && (aux (((>)delilna :: (fst pogoji)) , (snd pogoji)) b)
     | Ysplit (delilna, a, b) -> (aux ((fst pogoji) , ((<=)delilna :: (snd pogoji))) a) && (aux ((fst pogoji) , ((<)delilna :: (snd pogoji))) b) 
-  in
+  in *)
   ()
